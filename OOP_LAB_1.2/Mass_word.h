@@ -5,8 +5,6 @@
 #include <string>
 #include "constants.h"
 
-
-
 using namespace std;
 using namespace constants;
 
@@ -48,26 +46,20 @@ namespace  OOP_LAB_12
 		}
 		Mass_word(const Mass_word&); // копирующий конструктор
 
-
-		//Mass_word(Mass_word&&); // перемещающий конструктор
-		// перегруженный оператор присваивания
 		Mass_word & operator +=(const Mass_word &m); // перемещение данных из одного массива в другой	
 		Mass_word &operator =(const Mass_word &); // копирование данных из одного массива в другой
 
-		//Mass_word &operator =(Mass_word &&);		// перемещающий оператор присваивания
 		Mass_word & operator() (char c); // перегрузка оператора ()
 		Mass_word & sort(); // сортировка
 		const int & search(const Mass_word &m); //поиск слова
-		// размеры массива
-		int getSize() const { return size; }		// текущий
-		int getMaxSize() const { return SIZE; }	// максимальный
+
 		friend std::ostream & operator <<(std::ostream &, const Mass_word &);
 		friend std::istream & operator >>(std::istream &, Mass_word &);
 		const char* operator[] (const int index) const; // перегрузка оператора []
+	
 		char* strdup(char *s)
 		{
 			char *p = new char[strlen(s) + 1];
-
 			strcpy_s(p, strlen(s)+1, s);
 			return p;
 		}
