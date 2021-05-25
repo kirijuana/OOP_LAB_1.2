@@ -2,8 +2,6 @@
 #include <iostream>
 #include "Mass_word.h"
 
-
-
 using namespace std;
 using namespace  OOP_LAB_12;
 
@@ -50,7 +48,7 @@ int main()
 		case 2:
 		{
 			char mass[SIZE][LENGTH] = { "Nice", "good", "new", "try", "OK" , "normal" , "ABC" , "ok" , "abc" , "trouble" };
-			m = Mass_word(SIZE, mass);
+			//m = Mass_word(SIZE, mass);
 			break;
 		}
 		case 3:
@@ -136,7 +134,7 @@ int main()
 			}
 			break;
 		case 9:
-			try // проверка на сортировку пустого массива или массива из 1го элемента
+			try 
 			{
 				m.sort();
 				cout << "Массив упорядочен." << endl;

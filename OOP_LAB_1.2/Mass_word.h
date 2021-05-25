@@ -13,43 +13,40 @@ namespace  OOP_LAB_12
 	class Mass_word
 	{
 	private:
-		//static const int LENGTH = 15; // максимальная длина слова в массиве
-		//static const int SIZE = 10;   // размер массива по-умолчанию
 		int size;
 		char **mass;
 	public:
-		Mass_word() : size(SIZE), mass(new char*[size])
+		Mass_word() : size(0), mass(nullptr)
 		{
-			for (int i = 0; i < size; i++)
-				mass[i] = new char[LENGTH];
 		}
 
-		Mass_word(char *word) : size(1), mass(new char*[size])
-		{
+		Mass_word(const char *word) : size(1), mass(new char*[size])
+		{	
 			for (int i = 0; i < size; i++)
-				mass[i] = strdup(word);
+				mass[i] = strdup_(word);
 		}
 
-		Mass_word(int size_1, char word[SIZE][LENGTH]) : size(size_1), mass(new char*[size])
+		Mass_word(const int size_1, char **word) : size(size_1), mass(new char*[size]) // char **word
 		{
 			for (int i = 0; i < size; i++)
-				mass[i] = strdup(word[i]);
+				mass[i] = strdup_(word[i]);
 		}
 		~Mass_word()
 		{
  			for (int i = 0; i < size; i++)
 			{
-				delete[] mass[i];
+ 				delete[] mass[i];
 			}
- 			delete[] mass;
-			mass = nullptr;
+ 			delete[] mass;		
 		}
+
 		Mass_word(const Mass_word&); // копирующий конструктор
-
-		Mass_word & operator +=(const Mass_word &m); // перемещение данных из одного массива в другой	
+		Mass_word(Mass_word&&);			// перемещающий конструктор 
 		Mass_word &operator =(const Mass_word &); // копирование данных из одного массива в другой
-
+		// перемещающий оператор присваивания
+		Mass_word &operator =(Mass_word &&);
 		Mass_word & operator() (char c); // перегрузка оператора ()
+		Mass_word & operator +=(const Mass_word &m);
 		Mass_word & sort(); // сортировка
 		const int & search(const Mass_word &m); //поиск слова
 
@@ -57,11 +54,18 @@ namespace  OOP_LAB_12
 		friend std::istream & operator >>(std::istream &, Mass_word &);
 		const char* operator[] (const int index) const; // перегрузка оператора []
 	
-		char* strdup(char *s)
+		char* strdup_(const char *s)
 		{
-			char *p = new char[strlen(s) + 1];
-			strcpy_s(p, strlen(s)+1, s);
-			return p;
+			try
+			{
+				char *p = new char[strlen(s) + 1];
+				strcpy_s(p, strlen(s) + 1, s);
+				return p;
+			}
+			catch(exception &ex)
+			{
+				cout << ex.what() << endl;
+			}		
 		}
 	};
 }

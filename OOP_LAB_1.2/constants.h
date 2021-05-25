@@ -4,6 +4,6 @@
 namespace constants
 {
 	const int SIZE(10);
-	const int LENGTH(15);
+	const int LENGTH(100);
 }
 #endif
